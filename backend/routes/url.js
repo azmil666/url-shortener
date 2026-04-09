@@ -1,7 +1,6 @@
 import express from "express";
 import Url from "../models/Url.js";
-import pkg from "nanoid";
-const { nanoid } = pkg;
+import { nanoid } from "nanoid";
 
 const router = express.Router();
 
