@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import urlRoutes from './routes/url.js';
 
-dotenv.config();
+
 
 const app = express();
 
