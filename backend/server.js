@@ -1,7 +1,7 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import urlRoutes from './routes/url.js';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import urlRoutes from "./routes/url.js";
 
 const app = express();
 
@@ -10,15 +10,14 @@ app.use(express.json());
 
 app.use("/", urlRoutes);
 
-const PORT = process.env.PORT || 10000;
-
-
-console.log("ENV CHECK:");
-console.log("MONGO_URI:", process.env.MONGO_URI ? "FOUND" : "MISSING");
-console.log("PORT:", process.env.PORT);
+const PORT = process.env.PORT || 5000;
 
 async function startServer() {
   try {
+    if (!process.env.MONGO_URI) {
+      throw new Error("MONGO_URI is missing");
+    }
+
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB");
 
@@ -27,7 +26,7 @@ async function startServer() {
     });
 
   } catch (err) {
-    console.error("FATAL ERROR:", err);
+    console.error("FATAL ERROR:", err.message);
     process.exit(1);
   }
 }
